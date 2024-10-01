@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     UiModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideToastr()
   ],
   bootstrap: [AppComponent]
 })
