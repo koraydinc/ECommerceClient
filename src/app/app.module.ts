@@ -8,6 +8,8 @@ import { UiModule } from './ui/ui.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BaseComponent } from './base/base.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { provideToastr } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    UiModule
+    UiModule,
+    NgxSpinnerModule
   ],
   providers: [
     provideAnimationsAsync(),

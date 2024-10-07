@@ -9,10 +9,4 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'ECommerceClient';
-  constructor(private toastrService: CustomToastrService) {
-    this.toastrService.message("Merhabaa", "KOKO", {
-      messageType: ToastrMessageType.Error,
-      position: ToastrPosition.TopCenter
-    });
-  }
 }
