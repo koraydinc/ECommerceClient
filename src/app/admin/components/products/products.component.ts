@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BaseComponent, SpinnerType } from '../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../../../services/common/http-client.service';
-import { Product } from '../../../contracts/product';
+import { Create_Product } from '../../../contracts/create_product';
 
 @Component({
   selector: 'app-products',
@@ -16,10 +16,11 @@ export class ProductsComponent extends BaseComponent {
   }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.Timer);
-    this.httpClientService.get<Product[]>({
-      controller: "products"
-    }).subscribe(data => console.log(data[0].name));
+    //this.showSpinner(SpinnerType.Timer);
+
+    // this.httpClientService.get<Product[]>({
+    //   controller: "products"
+    // }).subscribe(data => console.log(data[0].name));
 
     // this.httpClientService.post({
     //   controller: "products"

@@ -14,6 +14,6 @@ export class HomeComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    this.showSpinner(SpinnerType.BallFussion);
+    //this.showSpinner(SpinnerType.BallFussion);
   }
 }

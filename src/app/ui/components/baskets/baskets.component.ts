@@ -13,6 +13,6 @@ export class BasketsComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    this.showSpinner(SpinnerType.BallFussion);
+    //this.showSpinner(SpinnerType.BallFussion);
   }
 }
