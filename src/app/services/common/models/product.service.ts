@@ -9,12 +9,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProductService {
   constructor(private httpClientService: HttpClientService) { }
 
-  create(product: Create_Product, successCallBack?: any, errorCallBack?: any) {
+  create(product: Create_Product, successCallBack?: any, errorCallBack?: (errorMessage: string) => void) {
     this.httpClientService.post({
       controller: "products"
     }, product)
       .subscribe({
-        next: () => successCallBack(),
+        complete: () => successCallBack(),
         error: (errorResponse: HttpErrorResponse) => {
           const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
           let errorMessage = "";
