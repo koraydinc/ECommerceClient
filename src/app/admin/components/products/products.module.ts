@@ -10,13 +10,15 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DeleteDirective } from '../../../directives/admin/delete.directive';
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
     CreateComponent,
-    ListComponent
+    ListComponent,
+    DeleteDirective
   ],
   imports: [
     CommonModule,
