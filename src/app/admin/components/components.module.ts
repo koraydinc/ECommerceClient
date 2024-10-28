@@ -17,10 +17,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
     DashboardModule
   ],
   exports: [
-    CustomersModule,
-    ProductsModule,
-    OrdersModule,
-    DashboardModule
   ]
 })
 export class ComponentsModule { }
