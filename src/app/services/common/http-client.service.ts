@@ -21,7 +21,7 @@ export class HttpClientService {
     } else {
       url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     }
-    return this.httpClient.get<T>(url, { headers: requestParameters.header });
+    return this.httpClient.get<T>(url, { headers: requestParameters.headers });
   }
 
   post<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
@@ -31,7 +31,7 @@ export class HttpClientService {
     } else {
       url = `${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     }
-    return this.httpClient.post<T>(url, body, { headers: requestParameters.header });
+    return this.httpClient.post<T>(url, body, { headers: requestParameters.headers });
   }
 
   put<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
@@ -41,7 +41,7 @@ export class HttpClientService {
     } else {
       url = `${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     }
-    return this.httpClient.put<T>(url, body, { headers: requestParameters.header });
+    return this.httpClient.put<T>(url, body, { headers: requestParameters.headers });
   }
 
   delete<T>(requestParameters: Partial<RequestParameters>, id: string): Observable<T> {
@@ -51,7 +51,7 @@ export class HttpClientService {
     } else {
       url = `${this.url(requestParameters)}/${id}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     }
-    return this.httpClient.delete<T>(url, { headers: requestParameters.header });
+    return this.httpClient.delete<T>(url, { headers: requestParameters.headers });
   }
 }
 
@@ -59,7 +59,7 @@ export class RequestParameters {
   controller?: string;
   action?: string;
   queryString?: string;
-  header?: HttpHeaders;
+  headers?: HttpHeaders;
   baseUrl?: string;
   fullEndpoint?: string;
 }
