@@ -4,6 +4,9 @@ import { HttpClientService } from '../http-client.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AlertifyService, MessageType, Position } from '../../admin/alertify.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FileUploadDialogComponent, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -13,7 +16,9 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui
 export class FileUploadComponent {
   constructor(private httpClientService: HttpClientService,
     private alertifyService: AlertifyService,
-    private customToastrService: CustomToastrService) { }
+    private customToastrService: CustomToastrService,
+    private dialog: MatDialog,
+    private dialogService: DialogService) { }
 
   public files: NgxFileDropEntry[];
 
@@ -27,74 +32,62 @@ export class FileUploadComponent {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
           fileDatas.append(file.name, file, droppedFile.relativePath)
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
-
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
-
         });
       } else {
-        // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
         console.log(droppedFile.relativePath, fileEntry);
       }
     }
 
-    this.httpClientService.post({
-      controller: this.options.controller,
-      action: this.options.action,
-      queryString: this.options.queryString,
-      headers: new HttpHeaders({ "responseType": "blob" })
-    }, fileDatas).subscribe({
-      complete: () => {
-        let message = "Dosyalar başarıyla yüklenmiştir.";
-        switch (this.options.isAdminPage) {
-          case true:
-            this.alertifyService.message(message, {
-              dismissOthers: true,
-              messageType: MessageType.Success,
-              position: Position.TopRight
-            })
-            break;
-          case false:
-            this.customToastrService.message(message, "Başarılı", {
-              messageType: ToastrMessageType.Success,
-              position: ToastrPosition.TopRight
-            })
-            break;
-        }
-      },
-      error: (errorResponse: HttpErrorResponse) => {
-        let message = "Dosyalar yüklenirken bir hata oluşmuştur.";
-        switch (this.options.isAdminPage) {
-          case true:
-            this.alertifyService.message(message, {
-              dismissOthers: true,
-              messageType: MessageType.Error,
-              position: Position.TopRight
-            })
-            break;
-          case false:
-            this.customToastrService.message(message, "Başarısız", {
-              messageType: ToastrMessageType.Error,
-              position: ToastrPosition.TopRight
-            })
-            break;
-        }
+    this.dialogService.openDialog({
+      componentType: FileUploadDialogComponent,
+      data: FileUploadState.Yes,
+      afterClosed: () => {
+        this.httpClientService.post({
+          controller: this.options.controller,
+          action: this.options.action,
+          queryString: this.options.queryString,
+          headers: new HttpHeaders({ "responseType": "blob" })
+        }, fileDatas).subscribe({
+          complete: () => {
+            let message = "Dosyalar başarıyla yüklenmiştir.";
+            switch (this.options.isAdminPage) {
+              case true:
+                this.alertifyService.message(message, {
+                  dismissOthers: true,
+                  messageType: MessageType.Success,
+                  position: Position.TopRight
+                })
+                break;
+              case false:
+                this.customToastrService.message(message, "Başarılı", {
+                  messageType: ToastrMessageType.Success,
+                  position: ToastrPosition.TopRight
+                })
+                break;
+            }
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            let message = "Dosyalar yüklenirken bir hata oluşmuştur.";
+            switch (this.options.isAdminPage) {
+              case true:
+                this.alertifyService.message(message, {
+                  dismissOthers: true,
+                  messageType: MessageType.Error,
+                  position: Position.TopRight
+                })
+                break;
+              case false:
+                this.customToastrService.message(message, "Başarısız", {
+                  messageType: ToastrMessageType.Error,
+                  position: ToastrPosition.TopRight
+                })
+                break;
+            }
+          }
+        })
       }
-    })
+    });
   }
 
   // public fileOver(event) {
