@@ -7,6 +7,8 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui
 import { MatDialog } from '@angular/material/dialog';
 import { FileUploadDialogComponent, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { DialogService } from '../dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from '../../../base/base.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -18,7 +20,9 @@ export class FileUploadComponent {
     private alertifyService: AlertifyService,
     private customToastrService: CustomToastrService,
     private dialog: MatDialog,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService) {
+  }
 
   public files: NgxFileDropEntry[];
 
@@ -43,13 +47,15 @@ export class FileUploadComponent {
       componentType: FileUploadDialogComponent,
       data: FileUploadState.Yes,
       afterClosed: () => {
+        this.spinner.show(SpinnerType.Timer);
         this.httpClientService.post({
           controller: this.options.controller,
           action: this.options.action,
           queryString: this.options.queryString,
           headers: new HttpHeaders({ "responseType": "blob" })
         }, fileDatas).subscribe({
-          complete: () => {
+          complete: () => {       
+            this.spinner.hide(SpinnerType.Timer);
             let message = "Dosyalar başarıyla yüklenmiştir.";
             switch (this.options.isAdminPage) {
               case true:
@@ -68,6 +74,7 @@ export class FileUploadComponent {
             }
           },
           error: (errorResponse: HttpErrorResponse) => {
+            this.spinner.hide(SpinnerType.Timer);
             let message = "Dosyalar yüklenirken bir hata oluşmuştur.";
             switch (this.options.isAdminPage) {
               case true:
@@ -84,6 +91,7 @@ export class FileUploadComponent {
                 })
                 break;
             }
+            
           }
         })
       }
