@@ -1,0 +1,42 @@
+<div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
+                <div class="mb-3 text-line">
+                    <label for="inputNameSurname" class="form-label">Name Surname</label>
+                    <input type="nameSurname" class="form-control" id="inputNameSurname" aria-describedby="nameSurnameWarning" formControlName="nameSurname" [ngClass]="{'is-invalid': submitted && controls.nameSurname.errors}">
+                    <div id="nameSurnameWarning" class="form-text warning-message" *ngIf="submitted && controls.nameSurname.errors?.required">Name Surname is required!</div>
+                    <div id="nameSurnameWarning" class="form-text warning-message" *ngIf="submitted && (controls.nameSurname.errors?.minlength || controls.nameSurname.errors?.maxlength)">Name Surname Length has to be between 3 and 50 characters!</div>
+                </div>
+                <div class="mb-3 text-line">
+                    <label for="inputEmail" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailWarning" formControlName="email">
+                    <div id="emailWarning" class="form-text warning-message" *ngIf="submitted && controls.email.errors?.required">Email Address is required!</div>
+                    <div id="emailWarning" class="form-text warning-message" *ngIf="submitted && controls.email.errors?.maxlength">Email Address Length has to be maximum 50 characters!</div>
+                    <div id="emailWarning" class="form-text warning-message" *ngIf="submitted && controls.email.errors?.email">Email Address format is not correct!</div>
+                </div>
+                <div class="mb-3 text-line">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input type="username" class="form-control" id="inputUsername" aria-describedby="usernameWarning" formControlName="username">
+                    <div id="usernameWarning" class="form-text warning-message" *ngIf="submitted && controls.username.errors?.required">Username is required!</div>
+                    <div id="usernameWarning" class="form-text warning-message" *ngIf="submitted && (controls.username.errors?.minlength || controls.username.errors?.maxlength)">Username Length has to be between 3 and 50 characters!</div>
+                </div>
+                <div class="mb-3 text-line">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" aria-describedby="passwordWarning" formControlName="password">
+                    <div id="usernameWarning" class="form-text warning-message" *ngIf="submitted && controls.password.errors?.required">Password is required!</div>
+                </div>
+                <div class="mb-3 text-line">
+                    <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="inputConfirmPassword" aria-describedby="confirmPasswordWarning" formControlName="confirmPassword">
+                    <div id="usernameWarning" class="form-text warning-message" *ngIf="submitted && controls.confirmPassword.errors?.required">Confirm Password is required!</div>
+                    <div id="usernameWarning" class="form-text warning-message" *ngIf="submitted && errors?.notSame">Password and Confirm Password are not matched!</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
