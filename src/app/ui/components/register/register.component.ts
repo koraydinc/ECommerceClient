@@ -1,7 +1,9 @@
-import { group } from '@angular/animations';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { UserRegister } from '../../../entities/user-register';
+import { Create_User } from '../../../contracts/user/create_user';
+import { User } from '../../../entities/user';
+import { UserService } from '../../../services/common/models/user.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/ui/custom-toastr.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { UserRegister } from '../../../entities/user-register';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService) {
   }
 
   frm: FormGroup;
@@ -50,17 +52,31 @@ export class RegisterComponent {
     return this.frm.controls;
   }
 
-  get errors(){
+  get errors() {
     return this.frm.errors;
   }
 
   submitted: boolean = false;
 
-  onSubmit(data: UserRegister) {
+  async onSubmit(user: User) {
     this.submitted = true;
 
     if (this.frm.invalid) {
       return;
+    }
+
+    let result: Create_User = await this.userService.create(user);
+
+    if (result.succeeded) {
+      this.toastrService.message(result.message, "Başarılı!", {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight
+      });
+    } else {
+      this.toastrService.message(result.message, "Hata!", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight
+      });
     }
   }
 }
