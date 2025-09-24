@@ -6,13 +6,13 @@
                 <label for="inputUsername" class="form-label">Username & Email</label>
                 <input #txtUsernameOrEmail type="username" class="form-control" id="inputUsername"
                     aria-describedby="usernameWarning">
-                <div id="usernameWarning" class="form-text warning-message">Username is required!</div>
+                <div *ngIf="showUsernameWarning" id="usernameWarning" class="form-text warning-message">Username is required!</div>
             </div>
             <div class="mb-3 text-line">
                 <label for="inputPassword" class="form-label">Password</label>
                 <input #txtPassword type="password" class="form-control" id="inputPassword"
                     aria-describedby="passwordWarning">
-                <div id="usernameWarning" class="form-text warning-message">Password is required!</div>
+                <div *ngIf="showPasswordWarning" id="passwordWarning" class="form-text warning-message">Password is required!</div>
             </div>
             <button type="submit" class="btn btn-primary"
                 (click)="login(txtUsernameOrEmail.value,txtPassword.value)">Login</button>
