@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from '../../../base/base.component';
+import { AuthService } from '../../../services/common/auth.service';
 import { UserService } from '../../../services/common/models/user.service';
 
 @Component({
@@ -9,13 +11,13 @@ import { UserService } from '../../../services/common/models/user.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent extends BaseComponent {
-  constructor(private userService: UserService, spinner : NgxSpinnerService) {
+  constructor(private userService: UserService, spinner: NgxSpinnerService, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {
     super(spinner);
-   }
-   showPasswordWarning = false;
-   showUsernameWarning = false;
+  }
+  showPasswordWarning = false;
+  showUsernameWarning = false;
 
-  login(usernameOrEmail: string, password: string) {
+  async login(usernameOrEmail: string, password: string) {
     this.showSpinner(SpinnerType.BallFussion);
     this.showPasswordWarning = !password;
     this.showUsernameWarning = !usernameOrEmail;
@@ -25,6 +27,13 @@ export class LoginComponent extends BaseComponent {
     }
     this.userService.login(usernameOrEmail, password)
       .then(() => {
+        this.authService.identityCheck();
+        this.activatedRoute.queryParams.subscribe((params) => {
+          const returnUrl = params['returnUrl'];
+          if (returnUrl) {
+            this.router.navigateByUrl(returnUrl);
+          }
+        });
         this.hideSpinner(SpinnerType.BallFussion);
       })
       .catch(() => {

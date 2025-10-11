@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
+import { AuthService } from './services/common/auth.service';
+import { CustomToastrService, ToastrPosition, ToastrMessageType } from './services/ui/custom-toastr.service';
 declare var $: any;
 
 @Component({
@@ -9,4 +10,14 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'ECommerceClient';
+
+  constructor(public authService: AuthService, private toastrService: CustomToastrService) {
+    this.authService.identityCheck();
+  }
+
+  logout() {
+    localStorage.removeItem("accessToken");
+    this.authService.identityCheck();
+    this.toastrService.message("Logout successful", "Success", { messageType: ToastrMessageType.Warning, position: ToastrPosition.TopRight });
+  }
 }
