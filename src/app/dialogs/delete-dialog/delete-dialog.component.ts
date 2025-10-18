@@ -3,9 +3,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseDialog } from '../base/base-dialog';
 
 @Component({
-  selector: 'app-delete-dialog',
-  templateUrl: './delete-dialog.component.html',
-  styleUrl: './delete-dialog.component.scss'
+    selector: 'app-delete-dialog',
+    templateUrl: './delete-dialog.component.html',
+    styleUrl: './delete-dialog.component.scss',
+    standalone: false
 })
 export class DeleteDialogComponent extends BaseDialog<DeleteDialogComponent> {
   constructor(

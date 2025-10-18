@@ -3,9 +3,10 @@ import { BaseComponent, SpinnerType } from '../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-baskets',
-  templateUrl: './baskets.component.html',
-  styleUrl: './baskets.component.scss'
+    selector: 'app-baskets',
+    templateUrl: './baskets.component.html',
+    styleUrl: './baskets.component.scss',
+    standalone: false
 })
 export class BasketsComponent extends BaseComponent {
   constructor(spinner: NgxSpinnerService) {

@@ -8,9 +8,10 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../..
 import { BaseComponent } from '../../../base/base.component';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss',
+    standalone: false
 })
 export class RegisterComponent extends BaseComponent {
   constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService, spinner: NgxSpinnerService) {

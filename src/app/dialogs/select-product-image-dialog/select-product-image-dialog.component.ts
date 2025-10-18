@@ -10,9 +10,10 @@ import { DialogService } from '../../services/common/dialog.service';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
 
 @Component({
-  selector: 'app-select-product-image-dialog',
-  templateUrl: './select-product-image-dialog.component.html',
-  styleUrl: './select-product-image-dialog.component.scss'
+    selector: 'app-select-product-image-dialog',
+    templateUrl: './select-product-image-dialog.component.html',
+    styleUrl: './select-product-image-dialog.component.scss',
+    standalone: false
 })
 export class SelectProductImageDialogComponent extends BaseDialog<SelectProductImageDialogComponent> {
   constructor(

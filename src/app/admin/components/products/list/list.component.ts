@@ -12,9 +12,10 @@ import { SelectProductImageDialogComponent } from '../../../../dialogs/select-pr
 declare var $: any;
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrl: './list.component.scss',
+    standalone: false
 })
 export class ListComponent extends BaseComponent {
   constructor(

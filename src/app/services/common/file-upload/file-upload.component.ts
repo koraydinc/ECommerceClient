@@ -11,9 +11,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../../base/base.component';
 
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss'
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrl: './file-upload.component.scss',
+    standalone: false
 })
 export class FileUploadComponent {
   constructor(private httpClientService: HttpClientService,

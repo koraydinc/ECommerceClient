@@ -7,9 +7,10 @@ import { AlertifyService, MessageType, Position } from '../../../../services/adm
 import { FileUploadOptions } from '../../../../services/common/file-upload/file-upload.component';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrl: './create.component.scss'
+    selector: 'app-create',
+    templateUrl: './create.component.html',
+    styleUrl: './create.component.scss',
+    standalone: false
 })
 export class CreateComponent extends BaseComponent {
   constructor(spinner: NgxSpinnerService, private productService: ProductService, private alertify: AlertifyService) {
