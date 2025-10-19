@@ -27,6 +27,9 @@ import { JwtModule } from '@auth0/angular-jwt';
         { provide: "baseUrl", useValue: "https://localhost:7188/api", multi: true },
         provideAnimationsAsync(),
         provideToastr(),
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+        provideHttpClient(
+            withInterceptors([authInterceptor])
+        )
+    ]
+})
 export class AppModule { }
