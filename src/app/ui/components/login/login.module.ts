@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
+import { GoogleSigninButtonDirective } from "@abacritt/angularx-social-login";
 
 
 
@@ -12,8 +13,9 @@ import { LoginComponent } from './login.component';
   imports: [
     CommonModule,
     RouterModule.forChild([{
-      path: '', component: LoginComponent
-    }])
-  ]
+            path: '', component: LoginComponent
+        }]),
+    GoogleSigninButtonDirective
+]
 })
 export class LoginModule { }

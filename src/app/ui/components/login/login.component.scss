@@ -4,3 +4,50 @@
 .warning-message{
     color: #6e0000;
 }
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login-btn {
+    flex: 1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+}
+
+.google-btn {
+    flex: 1;
+    
+    ::ng-deep .gsi-material-button {
+        width: 100% !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .login-btn,
+    .google-btn {
+        width: 100%;
+    }
+}

@@ -14,8 +14,12 @@
                     aria-describedby="passwordWarning">
                 <div *ngIf="showPasswordWarning" id="passwordWarning" class="form-text warning-message">Password is required!</div>
             </div>
-            <button type="submit" class="btn btn-primary"
-                (click)="login(txtUsernameOrEmail.value,txtPassword.value)">Login</button>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary login-btn"
+                    (click)="login(txtUsernameOrEmail.value,txtPassword.value)">Login</button>
+                <asl-google-signin-button class="google-btn"></asl-google-signin-button>
+            </div>
         </div>
         <div class="col-md-4"></div>
     </div>
