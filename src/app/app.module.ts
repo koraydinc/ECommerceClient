@@ -37,7 +37,7 @@ import { UiModule } from './ui/ui.module';
                 providers: [
                     {
                         id: GoogleLoginProvider.PROVIDER_ID,
-                        provider: new GoogleLoginProvider("171312266409-1rlh02ou5qcibkead9vuaqqfhcg1odds.apps.googleusercontent.com",{
+                        provider: new GoogleLoginProvider("YOUR_GOOGLE_CLIENT_ID", {
                             oneTapEnabled: false
                         })
                     }

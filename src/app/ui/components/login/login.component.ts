@@ -15,9 +15,6 @@ import { UserService } from '../../../services/common/models/user.service';
 export class LoginComponent extends BaseComponent {
   constructor(private userService: UserService, spinner: NgxSpinnerService, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private socialAuthService: SocialAuthService) {
     super(spinner);
-    this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      console.log(user);
-    });
   }
   showPasswordWarning = false;
   showUsernameWarning = false;
@@ -38,11 +35,35 @@ export class LoginComponent extends BaseComponent {
           if (returnUrl) {
             this.router.navigateByUrl(returnUrl);
           }
+          else {
+            this.router.navigateByUrl('/');
+          }
         });
         this.hideSpinner(SpinnerType.BallFussion);
       })
       .catch(() => {
         this.hideSpinner(SpinnerType.BallFussion);
       });
+  }
+
+  async googleLogin() {
+    this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
+      this.showSpinner(SpinnerType.BallFussion);
+      await this.userService.googleLogin(user).then(() => {
+        this.authService.identityCheck();
+        this.activatedRoute.queryParams.subscribe((params) => {
+          const returnUrl = params['returnUrl'];
+          if (returnUrl) {
+            this.router.navigateByUrl(returnUrl);
+          }
+          else {
+            this.router.navigateByUrl('/');
+          }
+        });
+        this.hideSpinner(SpinnerType.BallFussion);
+      }).catch(() => {
+        this.hideSpinner(SpinnerType.BallFussion);
+      });
+    });
   }
 }
